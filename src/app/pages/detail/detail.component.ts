@@ -1,11 +1,12 @@
 
-import { Component, OnInit ,ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { Documents } from 'src/app/services/azure/search';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { ElementRef } from '@angular/core';
 
 
 @Component({
@@ -19,17 +20,17 @@ export class DetailComponent implements OnInit {
 
   fieldvalue = '';
 
-  document :any  ;
+  doc :any  ;
 
   url: SafeResourceUrl;
 
-  searchTerm = "text";
+  searchTerm = "";
 
   caseSensitive = true;
 
+  OcrResult   ;
 
 
-  OcrResult : string  ;
 
   constructor(private sanitizer: DomSanitizer,private location :Location , private $documents : Documents , private activated :ActivatedRoute) { }
 
@@ -46,13 +47,13 @@ export class DetailComponent implements OnInit {
 
   initialise(path){
 
-    this.$documents.getDocumentInfo(path).subscribe((document)=>{
+    this.$documents.getDocumentInfo(path).subscribe((doc)=>{
 
-      this.document = document;
+      this.doc = doc;
 
-      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`https://archivagedatabase.blob.core.windows.net/container/${this.document?.metadata_storage_name}`);
+      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`https://archivagedatabase.blob.core.windows.net/container/${this.doc?.metadata_storage_name}`);
 
-      this.OcrResult= String(document.text)
+     this.OcrResult = doc.text
 
     },
     (error : HttpErrorResponse)=>{

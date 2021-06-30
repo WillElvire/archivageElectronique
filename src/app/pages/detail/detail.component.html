@@ -19,11 +19,11 @@
   <a class="btn btn-primary" style="margin-top: 4%;" (click)="Back()"> Retour </a>
 
 
-  <div class="row" *ngIf="document">
+  <div class="row" *ngIf="doc">
 
 
 
-    <h3 style="margin-top: 2%;">{{ document?.metadata_storage_name }}</h3>
+    <h3 style="margin-top: 2%;">{{ doc?.metadata_storage_name }}</h3>
 
 
     <div class="col-md-2">
@@ -39,9 +39,9 @@
 
            <br>
 
-          <p><img src="/assets/pdf.png"  *ngIf="document.metadata_storage_content_type == 'application/pdf' "class="img-fluid" width="25">
-           <img src="/assets/file.png"  *ngIf="document.metadata_storage_content_type == 'image/png' "class="img-fluid" width="25">
-           {{ document.metadata_storage_content_type }} </p>
+          <p><img src="/assets/pdf.png"  *ngIf="doc.metadata_storage_content_type == 'application/pdf' "class="img-fluid" width="25">
+           <img src="/assets/file.png"  *ngIf="doc.metadata_storage_content_type == 'image/png' "class="img-fluid" width="25">
+           {{ doc.metadata_storage_content_type }} </p>
 
          </div>
 
@@ -95,26 +95,14 @@
       <div class="card document" style="margin-top: 11.5%;align-items: center;">
 
         <div class="card-body"
-
-
         >
-
-
-        <p
-
+        <div
         [highlight]="searchTerm"
-        customClasses="text-primary"
+        customClasses="text-light text-bold bg-dark"
         >
-
-          <span id="text"></span>
-
-        </p>
-
+        sisis
         </div>
-
-
-
-
+      </div>
       </div>
 
      </div>
@@ -123,7 +111,7 @@
 
   </div>
 
-  <div *ngIf="!document" class="row justify-content-center">
+  <div *ngIf="!doc" class="row justify-content-center">
 
     <img src="/assets/Spinner.gif" class="img-fluid"  style="margin-top:10%;width: 100px;">
 
