@@ -13,9 +13,7 @@ import { ServerDetails } from './server/server';
 export class CognitiveSearchService {
 
 
-  server = "https://recherche002.search.windows.net/indexes?api-version=2020-06-30" ;
 
-  server2  = "https://recherche002.se.search.windows.net/datasources?api-version=2020-06-30" ;
 
 
   headers :HttpHeaders  =new HttpHeaders({
@@ -37,7 +35,53 @@ export class CognitiveSearchService {
 
   }
 
-  searchData(query: string, pageSize?: number): Observable<any> {
+
+  getSpectifiqDoc(docId):Observable<any>{
+
+    const server =`https://recherche002.search.windows.net/indexes/azure-index/docs/${docId}/?api-version=2020-06-30-Preview`
+
+    console.log(`In searchData method ${docId}`);
+
+    let result: Observable<any> = null;
+
+    const options = {
+
+      headers: this.headers
+
+    };
+
+    result = this.http.get<any>(server,options);
+
+    return result;
+
+
+
+  }
+
+  AddFilter(Filter):Observable<any>{
+
+    const server = `https://[service name].search.windows.net/indexes/azure-index/docs?api-version=2020-06-30&search=*$filter=${Filter}`;
+
+    console.log(`In searchData method ${Filter}`);
+
+    let result: Observable<any> = null;
+
+    const options = {
+
+      headers: this.headers
+
+    };
+
+    result = this.http.get<any>(server,options);
+
+    return result;
+
+  }
+
+  searchData(query: string): Observable<any> {
+
+
+    const server =`https://recherche002.search.windows.net/indexes/azure-index/docs?api-version=2020-06-30-Preview&search=${query}`
 
     console.log(`In searchData method ${query}`);
 
@@ -49,18 +93,17 @@ export class CognitiveSearchService {
 
     };
 
-    result = this.http.post<any>(ServerDetails.searchBasicUri, JSON.stringify({
-
-      search: query,
-
-      top: pageSize,
-
-    }), options);
+    result = this.http.get<any>(server,options);
 
     return result;
 
 
   }
+
+
+
+
+
 
 
 
@@ -74,13 +117,30 @@ export class CognitiveSearchService {
 
     };
 
-    result = this.http.get<any>(ServerDetails.searchBasicUri, options);
+    result = this.http.get<any>(ServerDetails.searchUri, options);
 
     return result;
 
 
   }
 
+
+  runIndexer() : Observable<any>{
+
+
+    const server = "https://recherche002.search.windows.net/indexers/azureblob-myindexer/run?api-version=2020-06-30-Preview";
+
+    const payLoad = {
+
+      'Content-Type':'application/json',
+
+      'api-key' :   ServerDetails.searchServiceAdminApiKey
+
+    }
+
+    return  this.http.put(server,JSON.stringify(payLoad));
+
+  }
 
 }
 

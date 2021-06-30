@@ -46,7 +46,7 @@ export class AppEnglishSearchComponent implements OnInit {
   // method for search query
   onChangeQuery(): void {
 
-    this.serv.searchData(this.query, this.pageSize).subscribe(resp => {
+    this.serv.searchData(this.query).subscribe(resp => {
 
       const response: any = resp.value;
 

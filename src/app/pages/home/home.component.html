@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-success">
-  <a class="navbar-brand text-light" href="#" style="margin-left: 2%;">Archivage Electronique</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand text-light" href="#" style="margin-left: 2%;">IA /archive </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,13 +8,18 @@
       <li class="nav-item active">
         <a class="nav-link text-light" href="#">Accueil</a>
       </li>
+      <div>
+
+        <input (keyup)="keyup($event.target.value)"   class=" form-control  searcbar" placeholder="search" style="width: 600px;margin-left: 37%;">
+
+      </div>
 
     </ul>
   </div>
 </nav>
 
 
-<div class="container">
+<div class="container-fluid">
 
   <div class="row">
 
@@ -32,33 +37,11 @@
 
           <p>  sort by </p>
 
-          <select class="form-control">
+          <select class="form-control" (click)="setFilter($event)">
 
-            <option>Date</option>
+            <option value="" >   </option>
 
-          </select>
-
-          <p>  sort by </p>
-
-          <select class="form-control">
-
-            <option>Date</option>
-
-          </select>
-
-          <p>  sort by </p>
-
-          <select class="form-control">
-
-            <option>Date</option>
-
-          </select>
-
-          <p>  sort by </p>
-
-          <select class="form-control">
-
-            <option>Date</option>
+            <option value="Date"    >Date</option>
 
           </select>
 
@@ -74,35 +57,40 @@
 
      <div>
 
-      <div class="row form-group">
 
-        <input (keyup)="keyup($event.target.value)"   class=" justify-content-center form-control col-md-6 searcbar" placeholder="search">
-
-      </div>
       <br>
       <h6  style="margin-left: 2%;">Recherche : {{ fieldvalue }} </h6>
 
       <div class="card document" style="margin-top: 5%;align-items: center;">
 
-        <div class="card-body">
-          <div class="card"  *ngIf="document">
-            <div class="card-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse blanditiis expedita unde dolorem laudantium nostrum in, iste veritatis non temporibus, minus cumque aperiam, saepe inventore facilis earum sint amet eveniet!
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est recusandae accusamus incidunt magnam, distinctio aliquam! Modi, aspernatur tenetur culpa maxime minima facilis error, explicabo atque minus placeat ullam cupiditate blanditiis!
-            </div>
-          </div>
-          <hr *ngIf="document">
+        <div class="card-body"  >
+          <div *ngFor="let document of documents.value;let i = index">
 
-          <div class="card"  *ngIf="document">
+          <div class="card"  *ngIf="!queryActivated" routerLink="detail/document/{{ document.metadata_storage_path }}">
+            <b style="margin-left: 2%;margin-top:2%">{{ document.metadata_storage_name }}</b>
             <div class="card-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse blanditiis expedita unde dolorem laudantium nostrum in, iste veritatis non temporibus, minus cumque aperiam, saepe inventore facilis earum sint amet eveniet!
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est recusandae accusamus incidunt magnam, distinctio aliquam! Modi, aspernatur tenetur culpa maxime minima facilis error, explicabo atque minus placeat ullam cupiditate blanditiis!
+              <img src="/assets/pdf.png"  *ngIf="document.metadata_storage_content_type == 'application/pdf' "class="img-fluid" width="80">
+              <img src="/assets/file.png"  *ngIf="document.metadata_storage_content_type == 'image/png' "class="img-fluid" width="80">
+              {{ document.metadata_storage_content_type }}
             </div>
           </div>
 
-          <img src="/assets/Spinner.gif" class="img-fluid" *ngIf="!document" width="50" height="50" style="margin-top:60%;">
+          <br>
 
         </div>
+
+        <div *ngIf="documents.value?.length==0 && !queryActivated && fieldvalue">
+
+           <h4> Information incorrect ou donnée manquante  </h4>
+
+        </div>
+
+        <img src="/assets/Spinner.gif" class="img-fluid" *ngIf="queryActivated" width="50" height="50" style="margin-top:60%;">
+
+
+        </div>
+
+
       </div>
 
      </div>

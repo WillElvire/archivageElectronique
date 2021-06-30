@@ -1,5 +1,6 @@
 import { Component, OnInit ,Input } from '@angular/core';
-import { CognitiveSearchService } from './../../services/azure/cognitive-search.service';
+
+import { Documents } from './../../services/azure/search/index';
 
 @Component({
   selector: 'app-home',
@@ -8,28 +9,44 @@ import { CognitiveSearchService } from './../../services/azure/cognitive-search.
 })
 export class HomeComponent implements OnInit {
 
-  document : boolean =true;
+  queryActivated : boolean =false;
 
   fieldvalue = '';
 
-  constructor(private cognitiveAzure :CognitiveSearchService) { }
+  documents :any  = [ ]
+
+  constructor(private $document :Documents) { }
 
   ngOnInit(): void {
+
+    this.initialise();
+
+    setInterval(()=>{ this.initialise() },1000000)
 
   }
 
 
 
-  keyup(event) {
+  initialise(){
 
-    this.document =!this.document;
-    this.fieldvalue = event;
+    this.queryActivated = true ;
 
-    this.cognitiveAzure.getResult().subscribe((info)=>{
+    this.$document.getAllDocuments().subscribe(
 
-      console.log(info);
+    (document)=>{
+
+      this.documents = document ;
+
+      this.queryActivated = false;
+
+      console.log(this.documents);
+
+
     },
+
     (error)=>{
+
+      this.queryActivated =false;
 
       console.log(error);
 
@@ -37,8 +54,87 @@ export class HomeComponent implements OnInit {
 
     )
 
-    //this.document=false;
+
+  }
+
+
+
+  keyup(event) {
+
+
+    this.fieldvalue = event;
+
+
+    if(this.fieldvalue!= ''){
+
+
+      this.queryActivated = true ;
+
+      this.$document.searchDocument(this.fieldvalue).subscribe(
+
+      (document)=>{
+
+        this.documents = document ;
+
+        this.queryActivated = false;
+
+        console.log(this.documents);
+
+
+      },
+
+      (error)=>{
+
+        this.queryActivated =false;
+
+        console.log(error);
+
+      }
+
+      )
+
+    }else{
+
+      this.initialise()
+    }
 
 }
+
+
+setFilter(Filter){
+
+  console.log(Filter);
+
+
+  this.queryActivated = true ;
+
+  this.$document.ApplyFilter(Filter).subscribe(
+
+    (document)=>{
+
+      this.documents = document ;
+
+      this.queryActivated = false;
+
+      console.log(this.documents);
+
+
+    },
+
+    (error)=>{
+
+      this.queryActivated =false;
+
+      console.log(error);
+
+    }
+
+
+
+
+
+  )
+
+  }
 
 }
