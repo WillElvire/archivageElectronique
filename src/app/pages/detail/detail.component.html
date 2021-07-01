@@ -59,7 +59,7 @@
 
        <div class="row form-group" style="margin-top: 2%;">
 
-        <input type="text" [(ngModel)]="searchTerm" class="form-control" />
+        <input type="text" [(ngModel)]="query" class="form-control" />
 
 
       </div>
@@ -97,10 +97,9 @@
         <div class="card-body"
         >
         <div
-        [highlight]="searchTerm"
-        customClasses="text-light text-bold bg-dark"
+        [innerHTML]="highlight()"
         >
-        sisis
+
         </div>
       </div>
       </div>

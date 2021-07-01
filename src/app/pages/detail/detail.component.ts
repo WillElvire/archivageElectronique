@@ -24,11 +24,11 @@ export class DetailComponent implements OnInit {
 
   url: SafeResourceUrl;
 
-  searchTerm = "";
+  query = "";
 
   caseSensitive = true;
 
-  OcrResult   ;
+  OcrResult:string   ;
 
 
 
@@ -67,20 +67,23 @@ export class DetailComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
   Back(){
 
     this.location.back();
 
   }
+
+
+  public highlight() {
+
+
+    if(!this.query) {
+        return this.OcrResult;
+    }
+    return this.OcrResult.toString().replace(new RegExp(this.query, "gi"), match => {
+        return '<mark class="bg-dark text-light">' + match + '</mark>';
+    });
+}
+
 
 }

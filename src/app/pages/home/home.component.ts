@@ -116,7 +116,7 @@ setFilter(Filter){
 
       this.queryActivated = false;
 
-      console.log(this.documents);
+
 
 
     },
@@ -130,11 +130,11 @@ setFilter(Filter){
     }
 
 
-
-
-
   )
 
   }
+
+
+
 
 }
