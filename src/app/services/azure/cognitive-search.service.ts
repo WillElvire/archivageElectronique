@@ -60,7 +60,7 @@ export class CognitiveSearchService {
 
   AddFilter(Filter):Observable<any>{
 
-    const server = `https://[service name].search.windows.net/indexes/azure-index/docs?api-version=2020-06-30&search=*$filter=${Filter}`;
+    const server = `https://recherche002.search.windows.net/indexes/azure-index/docs?api-version=2020-06-30-Preview&search=*&facet=metadata_storage_name?api-version=2020-06-30-Preview`;
 
     console.log(`In searchData method ${Filter}`);
 
@@ -77,6 +77,31 @@ export class CognitiveSearchService {
     return result;
 
   }
+
+
+
+
+  OrderBy(Field:any):Observable<any>{
+
+    const server = `https://recherche002.search.windows.net/indexes/azure-index/docs?api-version=2020-06-30-Preview&search=*&$orderby=content asc`;
+
+    console.log(`In searchData method ${Field}`);
+
+    let result: Observable<any> = null;
+
+    const options = {
+
+      headers: this.headers
+
+    };
+
+    result = this.http.get<any>(server,options);
+
+    return result;
+
+  }
+
+
 
   searchData(query: string): Observable<any> {
 

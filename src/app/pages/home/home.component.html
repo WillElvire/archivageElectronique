@@ -10,7 +10,7 @@
       </li>
       <div>
 
-        <input (keyup)="keyup($event.target.value)"   class=" form-control  searcbar" placeholder="search" style="width: 600px;margin-left: 37%;">
+        <input (keyup)="keyup($event.target.value)"   class=" form-control  searcbar" placeholder="search" style="width: 600px;margin-left: 20%;">
 
       </div>
 
@@ -29,22 +29,25 @@
 
        <div class="card-body">
 
-        <h4 class="row justify-content-center">  Filter  </h4>
+        <h4 class="row justify-content-center">  Options  </h4>
 
         <div>
 
           <br>
 
-          <p>  sort by </p>
+          <hr>
+          <p> Faccet </p>
+          <label>
+            <input type="checkbox"   (change)="setFilter('Date')">
+            Date
+          </label>
 
-          <select class="form-control" (click)="setFilter($event)">
-
-            <option value="" >   </option>
-
-            <option value="Date"    >Date</option>
-
-          </select>
-
+          <hr>
+          <p> Order By </p>
+          <label>
+            <input type="checkbox"   (change)="setFilter('Date')">
+            Size
+          </label>
         </div>
 
        </div>
@@ -53,7 +56,7 @@
 
    </div>
 
-   <div class="col-md-9" style="margin-top: 5%;">
+   <div class="col-md-9" >
 
      <div>
 
@@ -61,7 +64,7 @@
       <br>
       <h6  style="margin-left: 2%;">Recherche : {{ fieldvalue }} </h6>
 
-      <div class="card document" style="margin-top: 5%;align-items: center;">
+      <div class="card document" style="margin-top: 2%;align-items: center;">
 
         <div class="card-body"  >
           <div *ngFor="let document of documents.value;let i = index">
@@ -72,6 +75,10 @@
               <img src="/assets/pdf.png"  *ngIf="document.metadata_storage_content_type == 'application/pdf' "class="img-fluid" width="80">
               <img src="/assets/file.png"  *ngIf="document.metadata_storage_content_type == 'image/png' "class="img-fluid" width="80">
               {{ document.metadata_storage_content_type }}
+
+              <hr>
+              <p>Taille : <b >{{ document.metadata_storage_size }} kb</b></p>
+              <p>Langue :<b > {{ document.language }}</b></p>
             </div>
           </div>
 

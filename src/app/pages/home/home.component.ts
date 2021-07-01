@@ -1,4 +1,5 @@
 import { Component, OnInit ,Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { Documents } from './../../services/azure/search/index';
 
@@ -14,6 +15,9 @@ export class HomeComponent implements OnInit {
   fieldvalue = '';
 
   documents :any  = [ ]
+
+  public isChecked$ = new BehaviorSubject(false);
+
 
   constructor(private $document :Documents) { }
 
@@ -103,34 +107,36 @@ export class HomeComponent implements OnInit {
 
 setFilter(Filter){
 
-  console.log(Filter);
+  this.isChecked$.next(!this.isChecked$.value)
+
+  if(this.isChecked$.getValue){
+
+    this.queryActivated = true ;
+
+    this.$document.orderBy(Filter).subscribe(
+
+      (document)=>{
+
+        this.documents = document ;
+
+        this.queryActivated = false;
+      },
+
+      (error)=>{
+
+        this.queryActivated =false;
+
+        console.log(error);
+
+      }
 
 
-  this.queryActivated = true ;
-
-  this.$document.ApplyFilter(Filter).subscribe(
-
-    (document)=>{
-
-      this.documents = document ;
-
-      this.queryActivated = false;
+    )
 
 
+  }
 
 
-    },
-
-    (error)=>{
-
-      this.queryActivated =false;
-
-      console.log(error);
-
-    }
-
-
-  )
 
   }
 

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand text-light" href="#" style="margin-left: 2%;">Archivage Electronique</a>
+  <a class="navbar-brand text-light" href="#" style="margin-left: 2%;"> IA /archive</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -16,14 +16,14 @@
 
 <div class="container">
 
-  <a class="btn btn-primary" style="margin-top: 4%;" (click)="Back()"> Retour </a>
+  <a class="btn btn-primary" style="margin-top: 2%;" (click)="Back()"> Retour </a>
 
 
   <div class="row" *ngIf="doc">
 
 
 
-    <h3 style="margin-top: 2%;">{{ doc?.metadata_storage_name }}</h3>
+    <h3 style="margin-top: 1%;">{{ doc?.metadata_storage_name }}</h3>
 
 
     <div class="col-md-2">
@@ -51,7 +51,7 @@
 
 
     </div>
-    <div class="col-md-5" style="margin-top: 5%;">
+    <div class="col-md-5" style="margin-top: 2%;">
 
       <div>
 
@@ -64,7 +64,7 @@
 
       </div>
 
-       <div class="card document" style="margin-top: 5%;align-items: center;">
+       <div class="card document" style="margin-top: 2%;align-items: center;">
 
 
 
@@ -72,7 +72,7 @@
 
           <img src="/assets/Spinner.gif" class="img-fluid row justify-content-center" *ngIf="queryActivated" width="50" height="50" style="margin-top:60%;">
 
-          <iframe [src]="url"  type="application/pdf" width="auto" height="350">
+          <iframe [src]="url"  type="application/pdf" width="350" height="500">
 
           </iframe>
 
@@ -84,7 +84,7 @@
 
     </div>
 
-   <div class="col-md-5" style="margin-top: 5%;">
+   <div class="col-md-5" style="margin-top: 2%;">
 
      <div>
 

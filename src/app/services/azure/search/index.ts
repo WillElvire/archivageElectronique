@@ -47,6 +47,11 @@ export class Documents{
 
   }
 
+  orderBy(field){
+
+    return this.cognitiveSearch.OrderBy(field)
+
+  }
 
   getDocumentInfo(docId){
 

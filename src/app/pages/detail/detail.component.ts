@@ -78,11 +78,13 @@ export class DetailComponent implements OnInit {
 
 
     if(!this.query) {
-        return this.OcrResult;
+      return this.OcrResult;
     }
     return this.OcrResult.toString().replace(new RegExp(this.query, "gi"), match => {
         return '<mark class="bg-dark text-light">' + match + '</mark>';
     });
+
+
 }
 
 
