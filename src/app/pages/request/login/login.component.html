@@ -1,0 +1,16 @@
+<div class="container" style="margin-top: 10%">
+  <div class="card">
+    <div class="card-body">
+      <h1>Se connecter</h1>
+      <form  >
+        <label>Email</label>
+        <input class="form-control"  [(ngModel)]="Credential.email" name="email" />
+        <label>Mot de passe</label>
+        <input class="form-control"   [(ngModel)]="Credential.password" name="password" />
+        <hr />
+        <button class="btn btn-primary"  type="button" (click)="Login()">se connecter</button>
+      </form>
+      d'ont have account ? click <a routerLink="/register">here</a>
+    </div>
+  </div>
+</div>

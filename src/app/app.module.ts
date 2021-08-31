@@ -7,7 +7,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { HighlightModule } from './directives/hightlight.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './pages/request/login/login.component';
+import { RegisterComponent } from './pages/request/register/register.component';
+import { LandingComponent } from './pages/dashboard/landing/landing.component';
 
 
 
@@ -16,6 +19,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     DetailComponent,
+    LoginComponent,
+    RegisterComponent,
+    LandingComponent,
 
   ],
   imports: [
@@ -23,7 +29,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     HighlightModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [],
